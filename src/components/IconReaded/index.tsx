@@ -4,7 +4,7 @@ import noReadedSvg from '../../assets/img/noreaded.svg';
 
 type Props = {
     isMe: boolean;
-    isReaded: boolean;
+    isReaded?: boolean;
 };
 const IconReaded: React.FC<Props> = ({ isMe, isReaded }) =>
     (isMe &&

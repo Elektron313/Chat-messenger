@@ -1,7 +1,15 @@
-@import  '../../styles/variables';
+@import '../../styles/variables';
 
 .dialogs {
-  width: 300px;
+  &__search {
+    padding: 20px 20px 20px;
+    .ant-input {
+      background: #f7f8f9;
+      border: 0;
+      height: 32px;
+      padding: 4px 11px 6px;
+    }
+  }
   &__item {
     display: flex;
     margin-bottom: 20px;
@@ -22,6 +30,7 @@
         }
       }
     }
+
     &-avatar {
       position: relative;
       flex: 0 0 40px;

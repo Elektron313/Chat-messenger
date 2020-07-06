@@ -40,6 +40,49 @@
     line-height: 20px;
   }
 
+  &--is-audio {
+    #{$self}__bubble {
+      width: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+    #{$self}__audio {
+      &-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      &-progress {
+        background: #418FFF;
+        left: 0;
+        top: 0;
+        position: absolute;
+        height: 100%;
+        transition: width 0.4s ;
+      }
+      &-btn {
+        button {
+          cursor: pointer;
+          border: 0;
+          width: 28px;
+          height: 28px;
+          border-radius: 30px;
+          background: #0F3997;
+          img {
+            height: 13px;
+          }
+        }
+      }
+      &-duration {
+        color: #FFFFFF;
+        font-weight: 400;
+        opacity: 0.5;
+        font-size: 12px;
+      }
+    }
+  }
+
   &__attachments {
     display: flex;
     margin-bottom: 5px;

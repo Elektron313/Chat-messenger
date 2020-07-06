@@ -15,7 +15,7 @@ const LoginForm: React.FC = () => {
                 <Form>
                     <Form.Item>
                         <Input
-                            placeholder={'Введите логин'}
+                            placeholder={'Введите e-mail'}
                             size={'large'}
                             prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         />
