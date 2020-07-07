@@ -15,9 +15,24 @@ const getMessageTime = (created_at: Date | string): string => {
         return format(created_at, 'dd.MM.yyyy');
     }
 };
-const DialogItem: React.FC<DialogItemType> = ({ created_at, text, isReaded, user, unreaded, isMe, isOnilne }) => {
+type OnSelect = {
+    onSelectDialog: (id: string) => () => void;
+};
+const DialogItem: React.FC<DialogItemType & OnSelect> = ({
+    created_at,
+    text,
+    isReaded,
+    user,
+    unreaded,
+    isMe,
+    isOnilne,
+    onSelectDialog,
+}) => {
     return (
-        <div className={classNames('dialogs__item', { 'dialogs__item--online': isOnilne })}>
+        <div
+            onClick={onSelectDialog(user._id)}
+            className={classNames('dialogs__item', { 'dialogs__item--online': isOnilne })}
+        >
             <div className="dialogs__item-avatar">
                 <Avatar user={user} />
             </div>

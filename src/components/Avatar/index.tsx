@@ -8,7 +8,7 @@ type Avatar = {
 };
 const Avatar: React.FC<Avatar> = ({ user }) => {
     if (user.avatar) {
-        return <img src={user.avatar} alt={`avatar ${user.fullName}`} />;
+        return <img className={'avatar'} src={user.avatar} alt={`avatar ${user.fullName}`} />;
     }
     const { color, colorLighten } = generetaAvatarFromHash(user._id);
     const firstChar = user.fullName[0].toUpperCase();

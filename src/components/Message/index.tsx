@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import './Message.scss';
 import classNames from 'classnames';
 import { Avatar, IconReaded, Time } from '../index';
@@ -6,18 +6,8 @@ import waveSvg from '../../assets/img/wave.svg';
 import playSvg from '../../assets/img/play.svg';
 import pauseSvg from '../../assets/img/pause.svg';
 import convertCurrentTime from '../../utils/helpers/convertCurrentTime';
-import { User } from '../../types/types';
+import { MessageType } from '../../types/types';
 
-export type MessageType = {
-    text?: string;
-    date: Date;
-    user: User;
-    isMe: boolean;
-    isReaded?: boolean;
-    attachments?: any;
-    isTyping?: boolean;
-    audio?: string;
-};
 type MessageAudio = {
     audio: string;
 };

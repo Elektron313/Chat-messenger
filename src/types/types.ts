@@ -18,3 +18,14 @@ export type DialogItemType = {
 export type DialogsContainer = {
     items: DialogItemType[];
 };
+
+export type MessageType = {
+    text?: string;
+    date: Date;
+    user: User;
+    isMe: boolean;
+    isReaded?: boolean;
+    attachments?: any;
+    isTyping?: boolean;
+    audio?: string;
+};

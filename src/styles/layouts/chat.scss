@@ -84,10 +84,7 @@
 
     }
     &-messages {
-      padding: 20px 20px 0 20px;
-      height: calc(100% - 142px);
-      overflow: auto;
-      position: relative;
+      height: calc(100% - 144px);
     }
     .ant-empty {
       position: absolute;

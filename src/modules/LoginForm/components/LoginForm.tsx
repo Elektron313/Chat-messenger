@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { UserOutlined } from '@ant-design/icons/lib';
+import { MailOutlined } from '@ant-design/icons/lib';
 import { Link } from 'react-router-dom';
 import { Block, Button } from '../../../components';
 
@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
                         <Input
                             placeholder={'Введите e-mail'}
                             size={'large'}
-                            prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         />
                     </Form.Item>
                     <Form.Item>
