@@ -12,6 +12,5 @@ export const store = configureStore({
     middleware,
     devTools: process.env.NODE_ENV !== 'production',
 });
-
 export type AppStateType = ReturnType<typeof rootReducer>;
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>;

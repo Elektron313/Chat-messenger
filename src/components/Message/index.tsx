@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Message.scss';
 import classNames from 'classnames';
 import { Avatar, IconReaded, Time } from '../index';
@@ -7,6 +7,8 @@ import playSvg from '../../assets/img/play.svg';
 import pauseSvg from '../../assets/img/pause.svg';
 import convertCurrentTime from '../../utils/helpers/convertCurrentTime';
 import { MessageType } from '../../types/types';
+import { EllipsisOutlined } from '@ant-design/icons/lib';
+import { Popover } from 'antd';
 
 type MessageAudio = {
     audio: string;
@@ -62,7 +64,18 @@ const MessageAudio: React.FC<MessageAudio> = ({ audio }) => {
     );
 };
 
-const Message: React.FC<MessageType> = ({ audio, user, text, date, isMe, isReaded, attachments, isTyping }) => {
+const Message: React.FC<MessageType> = ({
+    audio,
+    user,
+    text,
+    date,
+    isMe,
+    isReaded,
+    attachments,
+    isTyping,
+    onRemoveMessage,
+    _id,
+}) => {
     return (
         <div
             className={classNames('message', {
@@ -73,6 +86,19 @@ const Message: React.FC<MessageType> = ({ audio, user, text, date, isMe, isReade
             })}
         >
             <div className="message__content">
+                <Popover
+                    placement={'bottom'}
+                    content={
+                        <div>
+                            <span onClick={() => onRemoveMessage(_id)}>Удалить</span>
+                        </div>
+                    }
+                    trigger={'click'}
+                >
+                    <div className="message__icon-actions">
+                        <EllipsisOutlined style={{ fontSize: '22px' }} />
+                    </div>
+                </Popover>
                 <IconReaded isMe={isMe} isReaded={isReaded} />
                 <div className="message__avatar">
                     <Avatar user={user} />
@@ -102,7 +128,7 @@ const Message: React.FC<MessageType> = ({ audio, user, text, date, isMe, isReade
                     )}
                     {date && (
                         <span className="message__date">
-                            <Time date={date} />
+                            <Time date={new Date(date)} />
                         </span>
                     )}
                 </div>

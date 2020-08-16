@@ -1,176 +1,56 @@
-import React from 'react';
-import { Message, Status, ChatInput, Messages } from '../../components';
-import Dialogs from '../../containers/Dialogs';
+import React, { useEffect } from 'react';
 import '../../styles/layouts/chat.scss';
 import './Home.scss';
-import { EditOutlined, EllipsisOutlined, TeamOutlined } from '@ant-design/icons/lib';
+import { Redirect, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../redux/store';
+import { Empty } from 'antd';
+import { setCurrentDialogId } from '../../redux/slices/dialogsSlice';
+
+import { Status, Messages, SideBar } from '../../containers';
+import { ChatInput } from '../../containers';
 
 const Home: React.FC = () => {
+    const dispatch = useDispatch();
+    const { pathname } = useLocation();
+    const isAuth = useSelector((state: AppStateType) => state.userReducer.isAuth);
+    const dialogId = useSelector((state: AppStateType) => state.dialogsReducer.currentDialogId);
+
+    useEffect(() => {
+        const dialogId = pathname.split('/').pop();
+        if (dialogId) {
+            dispatch(setCurrentDialogId(dialogId));
+        } else {
+            dispatch(setCurrentDialogId(''));
+        }
+    }, [pathname]);
     return (
-        <section className={'home'}>
-            <div className={'chat'}>
-                <div className="chat__sidebar">
-                    <div className="chat__sidebar-header">
-                        <div>
-                            <TeamOutlined />
-                            <span> Список диалогов</span>
+        <>
+            {isAuth ? (
+                <section className={'home'}>
+                    <div className={'chat'}>
+                        <SideBar />
+                        <div className="chat__dialog">
+                            {dialogId ? (
+                                <>
+                                    <div className="chat__dialog-header">
+                                        <Status />
+                                    </div>
+                                    <Messages />
+                                    <div className="chat__dialogs-input">
+                                        <ChatInput dialogId={dialogId} />
+                                    </div>
+                                </>
+                            ) : (
+                                <Empty description="Откройте диалог" />
+                            )}
                         </div>
-                        <EditOutlined />
                     </div>
-                    <div className="chat__sidebar-dialogs">
-                        <Dialogs />
-                    </div>
-                </div>
-                <div className="chat__dialog">
-                    <div className="chat__dialog-header">
-                        <div className="chat__dialog-empty"></div>
-                        <div className="chat__dialog-header-center">
-                            <b className="chat__dialog-header-username">Гай Цезарь</b>
-                            <div className="chat__dialog-header-status">
-                                <Status online={false} />
-                            </div>
-                        </div>
-                        <EllipsisOutlined style={{ fontSize: '22px' }} />
-                    </div>
-                    <div className="chat__dialog-messages">
-                        <Messages />
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    audio="https://notificationsounds.com/soundfiles/069059b7ef840f0c74a814ec9237b6ec/file-de_vuvuzela-power-down.mp3"*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={true}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                        {/*<Message*/}
-                        {/*    user={{*/}
-                        {/*        _id: 'asf',*/}
-                        {/*        fullName: 'ASDAS',*/}
-                        {/*        avatar: 'https://pp.userapi.com/c846017/v846017841/18957c/1iVH9FKXi4E.jpg?ava=1',*/}
-                        {/*    }}*/}
-                        {/*    isMe={false}*/}
-                        {/*    date={new Date('Sun Apr 21 2019 21:55:29')}*/}
-                        {/*    text={'dsaaaaaaaaaaaaaaaaaaaaaaaaaaqwevxcv'}*/}
-                        {/*/>*/}
-                    </div>
-                    <div className="chat__dialogs-input">
-                        <ChatInput />
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
+            ) : (
+                <Redirect to="/login" />
+            )}
+        </>
     );
 };
 

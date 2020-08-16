@@ -3,7 +3,8 @@ import { Avatar, IconReaded } from '../index';
 import classNames from 'classnames';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
-import { DialogItemType } from '../../types/types';
+import { DialogsItemType } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 const getMessageTime = (created_at: Date | string): string => {
     if (typeof created_at === 'string') {
@@ -16,40 +17,45 @@ const getMessageTime = (created_at: Date | string): string => {
     }
 };
 type OnSelect = {
-    onSelectDialog: (id: string) => () => void;
+    currentDialogId: string;
 };
-const DialogItem: React.FC<DialogItemType & OnSelect> = ({
-    created_at,
+const DialogItem: React.FC<DialogsItemType & OnSelect> = ({
+    createdAt,
     text,
     isReaded,
     user,
     unreaded,
     isMe,
-    isOnilne,
-    onSelectDialog,
+    currentDialogId,
+    id,
 }) => {
     return (
-        <div
-            onClick={onSelectDialog(user._id)}
-            className={classNames('dialogs__item', { 'dialogs__item--online': isOnilne })}
-        >
-            <div className="dialogs__item-avatar">
-                <Avatar user={user} />
-            </div>
-            <div className="dialogs__item-info">
-                <div className="dialogs__item-info-top">
-                    <b>{user.fullName}</b>
-                    <span>{getMessageTime(created_at)}</span>
+        <Link to={`/dialog/${id}`}>
+            <div
+                className={classNames(
+                    'dialogs__item',
+                    { 'dialogs__item--online': user.isOnline },
+                    { 'dialogs__item--select': currentDialogId === id }
+                )}
+            >
+                <div className="dialogs__item-avatar">
+                    <Avatar user={user} />
                 </div>
-                <div className="dialogs__item-info-bottom">
-                    <p>{text}</p>
-                    {isMe && <IconReaded isMe={true} isReaded={true} />}
-                    {unreaded > 0 && (
-                        <div className="dialogs__item-info-bottom-count">{unreaded > 9 ? '+9' : unreaded}</div>
-                    )}
+                <div className="dialogs__item-info">
+                    <div className="dialogs__item-info-top">
+                        <b>{user.fullName}</b>
+                        <span>{getMessageTime(createdAt)}</span>
+                    </div>
+                    <div className="dialogs__item-info-bottom">
+                        <p>{text}</p>
+                        {isMe && <IconReaded isMe={true} isReaded={isReaded} />}
+                        {unreaded > 0 && (
+                            <div className="dialogs__item-info-bottom-count">{unreaded > 9 ? '+9' : unreaded}</div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

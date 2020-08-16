@@ -6,9 +6,15 @@
   &__content {
     display: flex;
     max-width: 440px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     position: relative;
+
   }
+  //&:hover {
+  //  #{$self}__icon-actions {
+  //    display: block;
+  //  }
+
 
   &__avatar {
     display: flex;
@@ -20,6 +26,7 @@
       margin-right: 13px;
       margin-bottom: 5px;
       font-size: 14px;
+      line-height: 31px;
     }
   }
 
@@ -139,13 +146,27 @@
     }
   }
 
-  &__icon-readed {
-    position: absolute;
-    bottom: 22px;
-    left: -25px;
+  &__icon {
+    &-actions {
+      position: absolute;
+      transform: rotate(90deg);
+      left: -31px;
+      top: -5px;
 
-    &--no {
-      left: -20px;
+      &:hover svg {
+        cursor: pointer;
+        opacity: 1;
+      }
+    }
+
+    &-readed {
+      position: absolute;
+      bottom: 22px;
+      left: -25px;
+
+      &--no {
+        left: -20px;
+      }
     }
   }
 

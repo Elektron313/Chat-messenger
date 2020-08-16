@@ -1,25 +1,26 @@
-import { DialogItem } from '../components';
-
 export type User = {
     _id: string;
+    email: string;
     avatar?: string;
     fullName: string;
+    password: string;
+    isOnline: boolean;
+    confirmed: boolean;
+    confirmed_hash: string;
+    last_seen: Date;
 };
-export type DialogItemType = {
-    text: string;
-    created_at: Date | string;
+export type DialogsItemType = {
+    createdAt: Date;
+    text: string | undefined;
     isReaded: boolean;
     user: User;
-    isMe: boolean;
     unreaded: number;
-    isOnilne: boolean;
-};
-
-export type DialogsContainer = {
-    items: DialogItemType[];
+    isMe: boolean;
+    id: string;
 };
 
 export type MessageType = {
+    _id: string;
     text?: string;
     date: Date;
     user: User;
@@ -28,4 +29,5 @@ export type MessageType = {
     attachments?: any;
     isTyping?: boolean;
     audio?: string;
+    onRemoveMessage: (id: string) => void;
 };

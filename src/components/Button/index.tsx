@@ -6,6 +6,7 @@ import { BaseButtonProps } from 'antd/lib/button/button';
 
 type Button = {
     htmlType?: 'button' | 'submit' | 'reset' | undefined;
+    disabled?: boolean;
 };
 const Button: React.FC<BaseButtonProps & Button> = (props) => {
     return (

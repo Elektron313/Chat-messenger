@@ -57,10 +57,11 @@
 
   &__dialog {
     flex: 1;
+    position: relative;
 
     &-header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 12px;
       border-bottom: 1px solid #F7F7F7;
@@ -84,7 +85,7 @@
 
     }
     &-messages {
-      height: calc(100% - 144px);
+      height: calc(100% - 138px);
     }
     .ant-empty {
       position: absolute;
