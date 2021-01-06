@@ -21,7 +21,7 @@
     "@types/tinycolor2": "^1.4.2",
     "@types/yup": "^0.29.3",
     "antd": "^4.3.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
     "lodash": "^4.17.15",
